@@ -1,50 +1,36 @@
-# archived
+# Pre-commit mirror for Prettier
 
-prettier made some changes that breaks plugins entirely
+> [!NOTE]
+> This fork is a continuation of [github.com/pre-commit/mirrors-prettier](https://github.com/pre-commit/mirrors-prettier).
 
-___
-
-
-prettier mirror
-===============
-
-Mirror of prettier package for pre-commit.
-
-For pre-commit: see https://github.com/pre-commit/pre-commit
-
-For prettier: see https://github.com/prettier/prettier
-
+Mirror of the [Prettier](https://github.com/prettier/prettier) formatter for [pre-commit](https://github.com/pre-commit/pre-commit).
 
 ### Using prettier with pre-commit
 
 Add this to your `.pre-commit-config.yaml`:
 
 ```yaml
--   repo: https://github.com/pre-commit/mirrors-prettier
-    rev: ''  # Use the sha / tag you want to point at
+  - repo: https://github.com/ComPWA/prettier-pre-commit
+    rev: v4.0.0-alpha.8
     hooks:
-    -   id: prettier
+      - id: prettier
 ```
 
-*note*: only prettier versions >= 2.1.0 are supported
-
-When using plugins with `prettier` you'll need to declare them under
-`additional_dependencies`. For example:
+When using [Prettier plugins](https://prettier.io/docs/en/plugins), you'll need to declare them under [`additional_dependencies`](https://pre-commit.com/#config-additional_dependencies). For example:
 
 ```yaml
--   repo: https://github.com/pre-commit/mirrors-prettier
-    rev: ''  # Use the sha / tag you want to point at
+  - repo: https://github.com/ComPWA/prettier-pre-commit
+    rev: v4.0.0-alpha.8
     hooks:
-    -   id: prettier
+      - id: prettier
         additional_dependencies:
-        -   prettier@2.1.2
-        -   '@prettier/plugin-xml@0.12.0'
+          - prettier@4.0.0-alpha.8
+          - '@prettier/plugin-xml@3.4.1'
 ```
 
-By default, all files are passed to `prettier`, if you want to limit the
-file list, adjust `types` / `types_or` / `files`:
+By default, all files are passed to `prettier`, if you want to limit the file list, adjust `types` / `types_or` / `files`:
 
 ```yaml
-    -   id: prettier
+      - id: prettier
         types_or: [css, javascript]
 ```
