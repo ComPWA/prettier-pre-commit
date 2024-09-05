@@ -11,7 +11,7 @@ Add this to your `.pre-commit-config.yaml`:
 
 ```yaml
   - repo: https://github.com/ComPWA/prettier-pre-commit
-    rev: v2.8.8
+    rev: v3.1.1
     hooks:
       - id: prettier
 ```
@@ -20,11 +20,11 @@ When using [Prettier plugins](https://prettier.io/docs/en/plugins), you'll need 
 
 ```yaml
   - repo: https://github.com/ComPWA/prettier-pre-commit
-    rev: v2.8.8
+    rev: v3.1.1
     hooks:
       - id: prettier
         additional_dependencies:
-          - prettier@2.8.8
+          - prettier@3.1.1
           - '@prettier/plugin-xml@3.4.1'
 ```
 
