@@ -1,23 +1,29 @@
 name: main
 on:
-  push:
-    branches: [main]
   schedule:
-  - cron: '15 8 * * *'
+    - cron: "50 1 * * 1"
+  workflow_dispatch:
 
 jobs:
-  build:
-    name: main
+  update:
+    name: Upgrade hook
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v1
-    - uses: actions/setup-python@v1
-    - run: pip install pre-commit-mirror-maker
-    - run: git config --global user.name 'Github Actions'
-    - run: git config --global user.email '41898282+github-actions[bot]@users.noreply.github.com'
-    - run: pre-commit-mirror . --language=node --package-name=prettier --types=text --entry='prettier --write --ignore-unknown' --id=prettier
-    - run: |
-        git remote set-url origin https://x-access-token:$GH_TOKEN@github.com/$GITHUB_REPOSITORY
-        git push origin HEAD:refs/heads/main --tags
-      env:
-        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+      - name: Set up uv
+        run: curl -LsSf https://astral.sh/uv/install.sh | sh
+      - run: git config user.name 'Github Actions'
+      - run: git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+      - run: uv run --no-project .github/workflows/main.py
+      - run: |
+          git remote set-url origin https://x-access-token:${{ secrets.PAT }}@github.com/${{ github.repository }}
+          for tag in $(git tag); do
+            git push origin $tag
+          done
+          git push origin HEAD:refs/heads/main
+        # for-loop is required to trigger CI on the tags
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
