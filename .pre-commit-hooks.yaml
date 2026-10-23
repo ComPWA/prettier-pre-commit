@@ -8,5 +8,5 @@
   args: []
   require_serial: false
   additional_dependencies:
-  - prettier@3.9.8
+  - prettier@3.9.9
   minimum_pre_commit_version: '0'
