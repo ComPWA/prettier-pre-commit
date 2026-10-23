@@ -11,7 +11,7 @@ Add this to your `.pre-commit-config.yaml`:
 
 ```yaml
   - repo: https://github.com/ComPWA/prettier-pre-commit
-    rev: v3.9.0
+    rev: v3.9.1
     hooks:
       - id: prettier
 ```
@@ -20,12 +20,12 @@ When using [Prettier plugins](https://prettier.io/docs/en/plugins), you'll need 
 
 ```yaml
   - repo: https://github.com/ComPWA/prettier-pre-commit
-    rev: v3.9.0
+    rev: v3.9.1
     hooks:
       - id: prettier
         additional_dependencies:
-          - prettier@3.9.0
-          - '@prettier/plugin-xml@3.9.0'
+          - prettier@3.9.1
+          - '@prettier/plugin-xml@3.9.1'
 ```
 
 By default, all files are passed to `prettier`, if you want to limit the file list, adjust `types` / `types_or` / `files`:
